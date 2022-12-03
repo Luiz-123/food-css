@@ -9,7 +9,10 @@
 body {
     /*background: linear-gradient(304.58deg, #e1e9f4 57.1%, #3b83e0 45.5%);*/
     /*background: linear-gradient(304.58deg, #e1e9f4 57.1%, #3b83e0 145.5%);*/
-    background: linear-gradient(304.58deg, #eef3e5 57.1%, #82a751 145.5%);
+    /*background: linear-gradient(145.58deg, #82a75180 45.1%, #82a751 145.5%);*/
+    /*background-image: radial-gradient(circle farthest-side, #fceabb, #f8b500);*/
+    /* background-image: linear-gradient(to right top, #d16ba5, #d48ac0, #d8a7d6, #dec3e7, #e8ddf4, #e5e8fb, #e7f1fe, #eef9ff, #d1f9ff, #affaff, #88fbff, #5ffbf1);*/
+    background: linear-gradient(145.58deg, #82a75140 55.1%, #82a751 145.5%);
     margin: 0;
 }
 
@@ -65,6 +68,7 @@ nav {
 .primary-links {
     gap: 2em;
     margin: auto;
+    transitiom: 0.5s;
 }
 
 nav a {
@@ -153,7 +157,7 @@ nav a.active, nav a:hover, .secondary-links svg:hover, .hero-btns a:hover {
     position: absolute;
     top: -50px;
     right: 0;
-    background-image: url(./imgs/text-bg.png);
+    background-image: url(./img/text-bg.png);
     background-repeat: no-repeat;
     background-position: top right;
     background-size: contain;
@@ -164,7 +168,7 @@ nav a.active, nav a:hover, .secondary-links svg:hover, .hero-btns a:hover {
 
 .hero p {
     font-size: 22px;
-    color: #909090;
+    color: rgba(0,0,0,0.55);
     margin: 0;
     padding: 1em 0;
 }
@@ -224,10 +228,18 @@ nav a.active, nav a:hover, .secondary-links svg:hover, .hero-btns a:hover {
 
 .hero-img {
     justify-content: center;
+    overflow: hidden;
 }
 
 .hero-img img {
     max-width: 500px;
+    animation: girar 50s linear infinite;
+}
+
+@keyframes girar {
+    100% {
+        transform: rotate(360deg);
+    }
 }
 
 /* Media */
@@ -235,7 +247,7 @@ nav a.active, nav a:hover, .secondary-links svg:hover, .hero-btns a:hover {
     .toggleMenu {
         position: absolute;
         right: 5%;
-        background-image: url(.././imgs/open.svg);
+        background-image: url(.././img/open.svg);
         background-position: center;
         background-repeat: no-repeat;
         background-size: 30px;
@@ -248,8 +260,9 @@ nav a.active, nav a:hover, .secondary-links svg:hover, .hero-btns a:hover {
 
     .toggleMenu.active {
         position: fixed;
-        background-image: url(.././imgs/close.svg);
+        background-image: url(.././img/close2.svg);
         background-size: 25px;
+        /*background-color: #ffffff50;*/
     }
 
     .navigation {
@@ -265,12 +278,14 @@ nav a.active, nav a:hover, .secondary-links svg:hover, .hero-btns a:hover {
     .navigation.active {
         position: fixed;
         inset: 0;
-        margin: auto;
+        top: 0;
+        bottom: 0;
+        margin: 0;
         width: 100%;
-        max-height: 100%;
+        min-height: 100vh;
         opacity: 1;
         /*background: linear-gradient(304.58deg, #e1e9f4 57.1%, #3b83e0 145.5%);*/
-        background: linear-gradient(304.58deg, #eef3e5 57.1%, #82a751 145.5%);
+        background: rgba(6, 10, 0, 0.96);            
         transform: scale(1);
         z-index: 999;
     }
@@ -280,12 +295,28 @@ nav a.active, nav a:hover, .secondary-links svg:hover, .hero-btns a:hover {
         text-align: center;        
     }
 
+    nav ul li {
+        margin: 0.8em;
+    }
+
     .hero-img img {
         max-width: 100%;
-    }    
+    }
+    
+    
+    nav a.active, nav a:hover, .secondary-links svg:hover, .hero-btns a:hover {                
+        background: -webkit-linear-gradient(300deg, #ffffff90, #ffffff90);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+    }
+    
 }
 
 @media screen and (max-width: 500px) {
+    body {
+        background: linear-gradient(305.58deg, #82a75180 45.1%, #82a751 145.5%);
+    }
+    
     header {
         flex-direction: column;
     }    
@@ -298,5 +329,57 @@ nav a.active, nav a:hover, .secondary-links svg:hover, .hero-btns a:hover {
 
     .hero-btns a:nth-of-type(1) {
         margin-bottom: 20px;
+    }
+}
+
+/* Video Modal */
+.modal-bg {
+    position: fixed;
+    top: 0;
+    left: 0;
+    background: rgba(0,0,0,.8);
+    width: 100vw;
+    height: 100vh;
+    backdrop-filter: blur(5px);
+    overflow-y: scroll;
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    transition: opacity 0.4s ease-in-out;
+    z-index: 1;
+}
+
+.modal {
+    width: 90vw;
+    position: relative;
+    padding-top: 56.25%;
+    margin: 2em 0;
+}
+
+.modal iframe {
+    position: absolute;
+    top: 0;
+    left: 0;
+    border: none;
+    width: 100%;
+    height: 100%;
+}
+
+.modal-bg {
+    display: none;
+    opacity: 0;
+}
+
+@media screen and (min-height: 900px) {
+    .modal {
+        padding-top: 0;
+        width: 809px;
+        height: 505px;
+    }
+}
+
+@media screen and (max-width: 520px) {
+    .modal {
+        top: 25%;
     }
 }
